@@ -24,6 +24,14 @@
       {
         "command": "copilot-sveltekit-participant.askSvelteQuestion",
         "title": "Ask Svelte Expert a Question"
+      },
+      {
+        "command": "copilot-sveltekit-participant.analyzeSvelteComponent",
+        "title": "Analyze Current Svelte Component"
+      },
+      {
+        "command": "copilot-sveltekit-participant.analyzeSvelteKitProject",
+        "title": "Analyze SvelteKit Project"
       }
     ],
     "configuration": {
