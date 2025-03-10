@@ -1,0 +1,12 @@
+# Standard .gitignore for a VSCode extension project
+.vscode/
+.history/
+*.log
+*.tsbuildinfo
+
+# Existing entries
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
