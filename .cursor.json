@@ -1,0 +1,8 @@
+{
+  "rules": [".cursor/rules/svelte-expert.md"],
+  "settings": {
+    "useRulesForCompletions": true,
+    "useRulesForChat": true,
+    "contextStrategy": "comprehensive"
+  }
+}
