@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from 'vscode';
 
 /**
  * Interface representing Vite configuration suggestions
@@ -7,22 +7,22 @@ export interface ViteConfigSuggestions {
   /**
    * General suggestions for Vite configuration
    */
-  general: string[]
+  general: string[];
 
   /**
    * SvelteKit-specific suggestions
    */
-  svelteKit: string[]
+  svelteKit: string[];
 
   /**
    * Performance-related suggestions
    */
-  performance: string[]
+  performance: string[];
 
   /**
    * Development experience suggestions
    */
-  devExperience: string[]
+  devExperience: string[];
 }
 
 /**
@@ -37,18 +37,18 @@ export function analyzeViteConfig(content: string): ViteConfigSuggestions {
     svelteKit: [],
     performance: [],
     devExperience: [],
-  }
+  };
 
   // Check for build optimizations
   if (!content.includes('build: {')) {
     suggestions.performance.push(
       'Consider configuring build options for better production performance.',
-    )
+    );
   } else {
     if (!content.includes('rollupOptions')) {
       suggestions.performance.push(
         'Configure rollupOptions for more fine-grained control over the build.',
-      )
+      );
     }
   }
 
@@ -56,38 +56,38 @@ export function analyzeViteConfig(content: string): ViteConfigSuggestions {
   if (!content.includes('@sveltejs/kit/vite')) {
     suggestions.svelteKit.push(
       'Import SvelteKit\'s Vite plugin with `import { sveltekit } from "@sveltejs/kit/vite"`.',
-    )
+    );
   }
 
   // Check for server configuration
   if (!content.includes('server: {')) {
     suggestions.devExperience.push(
       'Configure server options for a better development experience.',
-    )
+    );
   }
 
   // Check for common optimizations
   if (!content.includes('optimizeDeps')) {
     suggestions.performance.push(
       'Use `optimizeDeps` to control which dependencies are pre-bundled.',
-    )
+    );
   }
 
   // Check for SSR configuration
   if (!content.includes('ssr: {')) {
     suggestions.svelteKit.push(
       'Consider configuring SSR options for SvelteKit applications.',
-    )
+    );
   }
 
   // Check for environment variables
   if (!content.includes('define: {') && !content.includes('envPrefix')) {
     suggestions.general.push(
       'Configure environment variables with `define` or `envPrefix`.',
-    )
+    );
   }
 
-  return suggestions
+  return suggestions;
 }
 
 /**
@@ -99,15 +99,15 @@ export async function analyzeProjectViteConfig(): Promise<ViteConfigSuggestions 
   const viteConfigFiles = await vscode.workspace.findFiles(
     '{vite.config.js,vite.config.ts}',
     '**/node_modules/**',
-  )
+  );
 
   if (viteConfigFiles.length === 0) {
-    return null
+    return null;
   }
 
   // Get the content of the first found Vite configuration file
-  const document = await vscode.workspace.openTextDocument(viteConfigFiles[0])
-  const content = document.getText()
+  const document = await vscode.workspace.openTextDocument(viteConfigFiles[0]);
+  const content = document.getText();
 
-  return analyzeViteConfig(content)
+  return analyzeViteConfig(content);
 }

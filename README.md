@@ -33,7 +33,7 @@ A specialized GitHub Copilot Chat Participant for VS Code that provides expert a
 ## Usage
 
 1. Open GitHub Copilot Chat in VS Code
-2. Type `@SvelteKit` to activate this participant
+2. Type either `@SvelteKit` or `@svelte` to activate this participant
 3. Ask questions about Svelte/SvelteKit development
 
 ### Example Queries

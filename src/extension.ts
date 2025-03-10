@@ -1,6 +1,6 @@
-import * as vscode from 'vscode'
-import { ChatView } from './views/chatView'
-import { registerCommands } from './commands'
+import * as vscode from 'vscode';
+import { ChatView } from './views/chatView';
+import { registerCommands } from './commands';
 
 /**
  * This method is called when the extension is activated.
@@ -9,68 +9,83 @@ import { registerCommands } from './commands'
  * @param context - The extension context provided by VS Code
  */
 export function activate(context: vscode.ExtensionContext) {
-  console.log('Copilot SvelteKit Participant is now active')
+  vscode.window.showInformationMessage(
+    'SvelteKit Chat Participant is now active!',
+  );
+  console.log('Copilot SvelteKit Participant is now active');
 
   // Initialize the chat view
-  const chatView = new ChatView(context)
+  const chatView = new ChatView(context);
 
   // Register all commands
-  registerCommands(context, chatView)
+  registerCommands(context, chatView);
 
   // Register the chat participant
-  const svelteParticipant = vscode.chat.createChatParticipant('svelte-expert', {
-    name: 'SvelteKit',
-    fullName: 'Svelte & SvelteKit Expert',
-    description:
-      'Provides expert assistance for Svelte and SvelteKit development',
-    isDefault: false,
-    supportIssueReporting: true,
-    iconPath: vscode.Uri.joinPath(
-      context.extensionUri,
-      'resources',
-      'svelte-logo.png',
-    ),
+  console.log('Attempting to register SvelteKit chat participant...');
 
-    // Handle incoming chat requests
-    async handleChatRequest(request, context, response, token) {
+  // Define the handler separate from participant properties
+  const svelteHandler = {
+    // Handle incoming chat requests - with proper type annotations
+    async handleRequest(
+      request: vscode.ChatRequest,
+      context: vscode.ChatContext,
+      response: vscode.ChatResponseStream,
+      token: vscode.CancellationToken,
+    ): Promise<void> {
       try {
         // Acknowledge the request started
-        await response.progress([
-          'Processing your Svelte/SvelteKit question...',
-        ])
+        response.progress('Processing your Svelte/SvelteKit question...');
 
         // Here we would normally process the request with specialized Svelte knowledge
         // For now, we'll just respond with a generic message
-        await response.markdown(`**Svelte Expert**: ${request.prompt}`)
-
+        response.markdown(`**Svelte Expert**: ${request.prompt}`);
         // Include metadata about Svelte versions when appropriate
-        await response.metadata({
-          svelteVersion: 'Svelte 5',
-          requestType: 'generic',
-          referenceLinks: [
-            { url: 'https://svelte.dev/docs', title: 'Svelte Documentation' },
-            {
-              url: 'https://kit.svelte.dev/docs',
-              title: 'SvelteKit Documentation',
-            },
-          ],
-        })
+        response.markdown(
+          '\n\n---\n\n**Resources:**\n- [Svelte Documentation](https://svelte.dev/docs)\n- [SvelteKit Documentation](https://kit.svelte.dev/docs)',
+        );
       } catch (error) {
-        console.error('Error handling chat request:', error)
-        await response.markdown(
+        console.error('Error handling chat request:', error);
+        response.markdown(
           'Sorry, I encountered an error while processing your request.',
-        )
+        );
       }
     },
-  })
+  };
 
-  // Register the participant to be disposed when the extension is deactivated
-  context.subscriptions.push(svelteParticipant)
+  // Create the participant with just the handler
+  const svelteParticipant = vscode.chat.createChatParticipant(
+    'SvelteKit',
+    svelteHandler as unknown as vscode.ChatRequestHandler,
+  );
+
+  // Also register a 'svelte' participant with the same handler
+  const svelteAlternateParticipant = vscode.chat.createChatParticipant(
+    'svelte',
+    svelteHandler as unknown as vscode.ChatRequestHandler,
+  );
+
+  // After creation, configure the display names
+  vscode.commands.executeCommand(
+    'setContext',
+    'chat.participantDisplayName.SvelteKit',
+    'Svelte & SvelteKit Expert',
+  );
+
+  vscode.commands.executeCommand(
+    'setContext',
+    'chat.participantDisplayName.svelte',
+    'Svelte & SvelteKit Expert',
+  );
+
+  console.log('SvelteKit chat participants registered successfully!');
+
+  // Register the participants to be disposed when the extension is deactivated
+  context.subscriptions.push(svelteParticipant, svelteAlternateParticipant);
 }
 
 /**
  * This method is called when the extension is deactivated
  */
 export function deactivate() {
-  console.log('Copilot SvelteKit Participant is now deactivated')
+  console.log('Copilot SvelteKit Participant is now deactivated');
 }

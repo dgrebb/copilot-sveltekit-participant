@@ -1,5 +1,5 @@
-import * as vscode from 'vscode'
+import * as vscode from 'vscode';
 
 export function openChat() {
-  vscode.window.showInformationMessage('Opening Copilot Chat...')
+  vscode.window.showInformationMessage('Opening Copilot Chat...');
 }

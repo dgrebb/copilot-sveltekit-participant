@@ -1,9 +1,9 @@
-import * as vscode from 'vscode'
-import { ChatView } from '../views/chatView'
+import * as vscode from 'vscode';
+import { ChatView } from '../views/chatView';
 import {
   analyzeSvelteComponent,
   analyzeSvelteKitProject,
-} from './analyzeSvelte'
+} from './analyzeSvelte';
 
 /**
  * Registers all commands for the extension
@@ -19,9 +19,9 @@ export function registerCommands(
   const openChatCommand = vscode.commands.registerCommand(
     'copilot-sveltekit-participant.openSvelteChat',
     () => {
-      chatView.show()
+      chatView.show();
     },
-  )
+  );
 
   // Register the askSvelteQuestion command
   const askQuestionCommand = vscode.commands.registerCommand(
@@ -30,27 +30,27 @@ export function registerCommands(
       const question = await vscode.window.showInputBox({
         prompt: 'What would you like to know about Svelte or SvelteKit?',
         placeHolder: 'Enter your Svelte/SvelteKit question...',
-      })
+      });
 
       if (question) {
         // Open the chat and automatically send the question
-        chatView.show()
-        chatView.sendMessage(question)
+        chatView.show();
+        chatView.sendMessage(question);
       }
     },
-  )
+  );
 
   // Register the analyze Svelte component command
   const analyzeComponentCommand = vscode.commands.registerCommand(
     'copilot-sveltekit-participant.analyzeSvelteComponent',
     analyzeSvelteComponent,
-  )
+  );
 
   // Register the analyze SvelteKit project command
   const analyzeProjectCommand = vscode.commands.registerCommand(
     'copilot-sveltekit-participant.analyzeSvelteKitProject',
     analyzeSvelteKitProject,
-  )
+  );
 
   // Add commands to subscriptions for proper disposal
   context.subscriptions.push(
@@ -58,5 +58,5 @@ export function registerCommands(
     askQuestionCommand,
     analyzeComponentCommand,
     analyzeProjectCommand,
-  )
+  );
 }
