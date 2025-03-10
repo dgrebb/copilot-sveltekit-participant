@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import * as vscode from 'vscode';
 
 /**
  * Interface representing SvelteKit route analysis
@@ -7,22 +7,22 @@ export interface SvelteKitRouteAnalysis {
   /**
    * The detected routing type (pages, filesystem, parameterized)
    */
-  routingType: 'pages' | 'filesystem' | 'parameterized' | 'unknown'
+  routingType: 'pages' | 'filesystem' | 'parameterized' | 'unknown';
 
   /**
    * Notes about the route structure
    */
-  notes: string[]
+  notes: string[];
 
   /**
    * Suggestions for improvements
    */
-  suggestions: string[]
+  suggestions: string[];
 
   /**
    * Detected route parameters
    */
-  parameters: string[]
+  parameters: string[];
 }
 
 /**
@@ -37,70 +37,73 @@ export async function analyzeSvelteKitRoutes(): Promise<SvelteKitRouteAnalysis |
     notes: [],
     suggestions: [],
     parameters: [],
-  }
+  };
 
   // Check for routes or pages directory
   const routesDir = await vscode.workspace.findFiles(
     'src/routes/**',
     '**/node_modules/**',
-  )
+  );
   const pagesDir = await vscode.workspace.findFiles(
     'src/pages/**',
     '**/node_modules/**',
-  )
+  );
 
   if (routesDir.length > 0) {
-    analysis.routingType = 'filesystem'
+    analysis.routingType = 'filesystem';
     analysis.notes.push(
       'Project uses SvelteKit filesystem-based routing in src/routes.',
-    )
+    );
 
     // Check for parameterized routes (files/directories with [param] syntax)
     const paramRoutes = routesDir.filter(
       (uri) => uri.path.includes('[') && uri.path.includes(']'),
-    )
+    );
     if (paramRoutes.length > 0) {
-      analysis.routingType = 'parameterized'
-      analysis.notes.push('Project contains parameterized routes.')
+      analysis.routingType = 'parameterized';
+      analysis.notes.push('Project contains parameterized routes.');
 
       // Extract parameter names from route paths
       paramRoutes.forEach((uri) => {
-        const params = uri.path.match(/\[([^\]]+)\]/g)
+        const params = uri.path.match(/\[([^\]]+)\]/g);
         if (params) {
           params.forEach((param) => {
-            const paramName = param.replace('[', '').replace(']', '')
+            const paramName = param.replace('[', '').replace(']', '');
             if (!analysis.parameters.includes(paramName)) {
-              analysis.parameters.push(paramName)
+              analysis.parameters.push(paramName);
             }
-          })
+          });
         }
-      })
+      });
     }
   } else if (pagesDir.length > 0) {
-    analysis.routingType = 'pages'
-    analysis.notes.push('Project uses pages directory for routing.')
+    analysis.routingType = 'pages';
+    analysis.notes.push('Project uses pages directory for routing.');
     analysis.suggestions.push(
       'SvelteKit has standardized on the routes directory. Consider migrating from pages to routes.',
-    )
+    );
   } else {
     analysis.notes.push(
       'No route structure detected. Make sure your project follows SvelteKit conventions.',
-    )
+    );
   }
 
-  return analysis
+  return analysis;
 }
 
 /**
  * Generate SvelteKit route template for the given path
  *
  * @param routePath - The route path in SvelteKit format (e.g., /users/[id])
- * @returns Generated route template code
+ * @returns Object containing generated route template code for different file types
  */
-export function generateSvelteKitRouteTemplate(routePath: string): string {
+export function generateSvelteKitRouteTemplate(routePath: string): {
+  '+page.svelte': string;
+  '+page.server.ts': string;
+} {
   // Extract parameters from the path
-  const params = routePath.match(/\[([^\]]+)\]/g) || []
-  const paramNames = params.map((p) => p.replace('[', '').replace(']', ''))
+  const params = routePath.match(/\[([^\]]+)\]/g) || [];
+  const paramNames = params.map((p) => p.replace('[', '').replace(']', ''));
 
   // Generate the +page.svelte template
   const pageTemplate = `<script lang="ts">
@@ -152,7 +155,7 @@ export function generateSvelteKitRouteTemplate(routePath: string): string {
     border: 1px solid #ccc;
     border-radius: 0.5rem;
   }
-</style>`
+</style>`;
 
   // Generate the +page.server.ts template for data loading
   const serverTemplate = `import type { PageServerLoad } from './$types';
@@ -170,10 +173,10 @@ export const load: PageServerLoad = async ({ params${
     title: 'SvelteKit Route${routePath !== '/' ? `: ${routePath}` : ''}',
     ${paramNames.length > 0 ? `params: { ${paramNames.join(', ')} },` : ''}
   };
-};`
+};`;
 
   return {
     '+page.svelte': pageTemplate,
     '+page.server.ts': serverTemplate,
-  }
+  };
 }

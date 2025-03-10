@@ -1,12 +1,12 @@
-import * as vscode from 'vscode'
+import * as vscode from 'vscode';
 
 /**
  * Manages the chat WebView panel for the Svelte/SvelteKit expert
  */
 export class ChatView {
-  private panel: vscode.WebviewPanel | undefined
-  private context: vscode.ExtensionContext
-  private messages: { sender: string; text: string }[] = []
+  private panel: vscode.WebviewPanel | undefined;
+  private context: vscode.ExtensionContext;
+  private messages: { sender: string; text: string }[] = [];
 
   /**
    * Creates a new ChatView instance
@@ -14,15 +14,15 @@ export class ChatView {
    * @param context - The extension context
    */
   constructor(context: vscode.ExtensionContext) {
-    this.context = context
+    this.context = context;
 
     // Load previous messages from storage if they exist
     const storedMessages =
       this.context.globalState.get<{ sender: string; text: string }[]>(
         'chatMessages',
-      )
+      );
     if (storedMessages) {
-      this.messages = storedMessages
+      this.messages = storedMessages;
     }
   }
 
@@ -31,7 +31,7 @@ export class ChatView {
    */
   public show() {
     if (this.panel) {
-      this.panel.reveal()
+      this.panel.reveal();
     } else {
       this.panel = vscode.window.createWebviewPanel(
         'svelteKitChat',
@@ -44,32 +44,32 @@ export class ChatView {
             vscode.Uri.joinPath(this.context.extensionUri, 'media'),
           ],
         },
-      )
+      );
 
       // Handle panel disposal
       this.panel.onDidDispose(
         () => {
-          this.panel = undefined
+          this.panel = undefined;
         },
         null,
         this.context.subscriptions,
-      )
+      );
 
       // Handle messages from the webview
       this.panel.webview.onDidReceiveMessage(
         (message) => {
           switch (message.command) {
             case 'sendMessage':
-              this.sendMessage(message.text)
-              break
+              this.sendMessage(message.text);
+              break;
           }
         },
         undefined,
         this.context.subscriptions,
-      )
+      );
 
       // Set initial HTML content
-      this.updateWebviewContent()
+      this.updateWebviewContent();
     }
   }
 
@@ -80,13 +80,13 @@ export class ChatView {
    */
   public async sendMessage(text: string): Promise<void> {
     // Add user message to history
-    this.messages.push({ sender: 'user', text })
+    this.messages.push({ sender: 'user', text });
 
     // Update UI
-    this.updateWebviewContent()
+    this.updateWebviewContent();
 
     // Save messages to storage
-    this.context.globalState.update('chatMessages', this.messages)
+    this.context.globalState.update('chatMessages', this.messages);
 
     // In a real implementation, we would send this to the Copilot API
     // For now, we'll just simulate a response
@@ -97,14 +97,14 @@ export class ChatView {
       this.messages.push({
         sender: 'assistant',
         text: `I'm your Svelte/SvelteKit expert assistant. You asked: "${text}". In a real implementation, I would provide expert Svelte advice here.`,
-      })
+      });
 
       // Update UI with response
-      this.updateWebviewContent()
+      this.updateWebviewContent();
 
       // Save messages to storage
-      this.context.globalState.update('chatMessages', this.messages)
-    }, 1000)
+      this.context.globalState.update('chatMessages', this.messages);
+    }, 1000);
   }
 
   /**
@@ -112,10 +112,10 @@ export class ChatView {
    */
   private updateWebviewContent() {
     if (!this.panel) {
-      return
+      return;
     }
 
-    this.panel.webview.html = this.getHtmlForWebview()
+    this.panel.webview.html = this.getHtmlForWebview();
   }
 
   /**
@@ -127,18 +127,18 @@ export class ChatView {
     // Convert messages to HTML
     const messagesHtml = this.messages
       .map((message) => {
-        const isUser = message.sender === 'user'
-        const className = isUser ? 'user-message' : 'assistant-message'
-        const senderLabel = isUser ? 'You' : 'SvelteKit Expert'
+        const isUser = message.sender === 'user';
+        const className = isUser ? 'user-message' : 'assistant-message';
+        const senderLabel = isUser ? 'You' : 'SvelteKit Expert';
 
         return `
         <div class="message ${className}">
           <div class="message-header">${senderLabel}</div>
           <div class="message-content">${this.escapeHtml(message.text)}</div>
         </div>
-      `
+      `;
       })
-      .join('')
+      .join('');
 
     return `
       <!DOCTYPE html>
@@ -259,7 +259,7 @@ export class ChatView {
         </script>
       </body>
       </html>
-    `
+    `;
   }
 
   /**
@@ -274,6 +274,6 @@ export class ChatView {
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;')
+      .replace(/'/g, '&#039;');
   }
 }
