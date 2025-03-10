@@ -1,87 +1,116 @@
 # GitHub Copilot Chat Participant - Svelte & SvelteKit Expert
 
-## Overview
+## Project Overview
+This VS Code extension creates a specialized GitHub Copilot Chat Participant that provides expert assistance for Svelte and SvelteKit development. The extension itself is built with TypeScript and VS Code's extension API.
 
-This document defines the specifications for the **GitHub Copilot Chat Participant**, a **Visual Studio Code extension** that provides expert assistance for **Svelte** and **SvelteKit**.
+## Project Specifications:
+- TypeScript-based VS Code extension with strict typing
+- Chat interface using VS Code's WebviewPanel API
+- Command palette integration to open the chat
+- Message history persistence using ExtensionContext
+- SvelteKit context-awareness for improved assistance
 
-This Chat Participant is **not part of a Svelte or SvelteKit project itself**—instead, it **helps developers working on Svelte/SvelteKit applications** by providing high-quality coding suggestions, best practices, and debugging insights.
+## Development Requirements:
+1. Use TypeScript with comprehensive JSDoc comments
+2. Follow a modular architecture (commands/, views/, utils/)
+3. Implement proper error handling and testing
+4. Maintain clear separation of concerns
+5. Use async/await for asynchronous operations
+6. Ensure all disposables are properly managed
 
-## Features
+## Current State:
+- Project structure and configuration files are set up
+- AI/LLM instruction files are in place (.vscode/ and .cursor/rules/)
+- Basic scaffolding for the extension is implemented
+- Build configuration is ready (but needs standardization)
+- GitHub Copilot and Cursor AI custom instruction rules are defined
+
+## Immediate Tasks:
+1. Implement the core ChatParticipant class that integrates with GitHub Copilot
+2. Create a UI for the chat interface using WebviewPanel
+3. Implement message history storage and retrieval with ExtensionContext
+4. Build a command registration system following the Command Pattern
+5. Implement proper error handling and logging throughout
+6. Ensure the participant can access standard Copilot context commands
+7. Create configuration options for the chat experience
+8. Standardize on either webpack or esbuild (not both)
+9. Add unit tests for core functionality
+10. Document the extension with JSDoc comments
+
+## Features to Implement
 
 ### 1. Svelte & SvelteKit Expertise
-- Ingests the official **Svelte [LLMs.txt](https://svelte.dev/llms-full.txt) file** before responding to user input.
-- Uses only **Svelte and SvelteKit documentation** as reference sources (avoids external AI-generated content).
-- Provides **guidance on best practices**, including **reactivity, stores, SSR, and routing**.
+- Ingest the official Svelte [LLMs.txt](https://svelte.dev/llms-full.txt) file before responding to user input
+- Reference only official Svelte and SvelteKit documentation
+- Provide guidance on best practices for reactivity, stores, SSR, and routing
 
 ### 2. Code Suggestions & Best Practices
-- Generates solutions that are **elegant, efficient, and idiomatic** to Svelte.
-- Provides **well-structured** TypeScript solutions with:
-  - **Strict type definitions**
-  - **Comprehensive JSDoc comments**
-  - **Error handling**
-  - **VS Code API best practices**
-  - **Unit tests (Jest)**
-- Ensures **modular, maintainable code** by using dependency injection when applicable.
+- Generate solutions that are elegant, efficient, and idiomatic to Svelte
+- Provide well-structured TypeScript solutions with strict type definitions
+- Include comprehensive JSDoc comments in generated code
+- Implement proper error handling in examples
 
 ### 3. Version Compatibility Assistance
-- Detects **Svelte 4 vs. Svelte 5** differences and warns users if they mix incompatible APIs.
-- Provides **upgrade guidance** for migrating **from Svelte 4 to Svelte 5**.
-- Suggests **modern alternatives** to deprecated APIs.
+- Detect Svelte 4 vs. Svelte 5 differences
+- Warn when mixing incompatible APIs
+- Provide upgrade guidance for migrating from Svelte 4 to Svelte 5
+- Suggest modern alternatives to deprecated APIs
 
 ### 4. Vite Configuration Guidance
-- Offers **Vite optimization suggestions** related to:
-  - **Performance tuning** (e.g., prebundling, tree-shaking).
-  - **SvelteKit SSR configuration**.
-  - **Developer experience enhancements** (e.g., fast refresh, aliasing).
-- Detects **misconfigurations** and suggests corrections.
+- Offer Vite optimization suggestions for Svelte/SvelteKit projects
+- Provide SvelteKit SSR configuration guidance
+- Suggest developer experience enhancements
+- Detect misconfigurations and suggest corrections
 
 ## Implementation Guidelines
 
 ### Code Standards
-- **This is a VS Code extension**—all code follows **VS Code extension API best practices**.
-- **TypeScript with strict mode enabled**.
-- **ESLint + Prettier** for formatting and linting.
-- **Follow JSDoc documentation standards**.
-- **Async/await for asynchronous operations** (no direct Promises).
-- **Unit tests with Jest**.
+- Use TypeScript with strict mode enabled
+- Follow VS Code extension API best practices
+- Use ESLint + Prettier for formatting and linting
+- Document with JSDoc standards
+- Use async/await for asynchronous operations
+- Write unit tests with Jest
 
 ### Development Principles
-1. **Simplicity First** – Start with the simplest solution, refactor if necessary.
-2. **Follow VS Code API Best Practices** – Use built-in APIs over custom implementations.
-3. **Error Handling & Logging** – Provide meaningful messages and log errors properly.
-4. **Maintain Testability** – Design code that supports Jest-based testing.
+1. **Simplicity First** – Start with the simplest solution, refactor if necessary
+2. **Follow VS Code API Best Practices** – Use built-in APIs over custom implementations
+3. **Error Handling & Logging** – Provide meaningful messages and log errors properly
+4. **Maintain Testability** – Design code that supports Jest-based testing
 
 ### Architecture (VS Code Extension Specific)
-- **Command Pattern**: Register commands in `extension.ts`, implement them in `commands/`.
-- **Webview Pattern**: UI components implemented using `WebviewPanel`.
-- **State Management**: Use `ExtensionContext` for persistent data.
-- **Dependency Injection**: Improve testability and modularity.
-- **Cleanup & Disposal**: Ensure proper resource management using `context.subscriptions`.
+- **Command Pattern**: Register commands in `extension.ts`, implement them in `commands/`
+- **Webview Pattern**: UI components implemented using `WebviewPanel`
+- **State Management**: Use `ExtensionContext` for persistent data
+- **Dependency Injection**: Improve testability and modularity
+- **Cleanup & Disposal**: Ensure proper resource management using `context.subscriptions`
 
-## Avoid
-- **Ignoring Error Handling** – Always catch and log errors.
-- **Tightly Coupled Components** – Keep modules independent.
-- **Synchronous File Operations** – Prefer VS Code’s async file API.
-- **Overengineering** – Keep solutions straightforward.
+## Patterns to use:
+- Command registration pattern using vscode.commands.registerCommand
+- Webview panels for UI components
+- Context for state management
+- Disposables for cleanup
+
+## Avoid:
+- Any code that doesn't handle errors
+- Synchronous file operations
+- Tight coupling between components
+- Overengineering simple solutions
 
 ## Testing Strategy
-- **Unit tests** for utilities and business logic.
-- **Integration tests** for command execution.
-- **Mock VS Code API** to ensure isolated testing.
+- **Unit tests** for utilities and business logic
+- **Integration tests** for command execution
+- **Mock VS Code API** to ensure isolated testing
 
 ## Documentation
-- **JSDoc for all public APIs**.
-- **Examples included in function documentation**.
-- **CHANGELOG updates** for user-facing changes.
+- **JSDoc for all public APIs**
+- **Examples included in function documentation**
+- **CHANGELOG updates** for user-facing changes
 
 ## Common Pitfalls & Solutions
 | Pitfall | Solution |
 |---------|----------|
 | Forgetting to clean up WebviewPanels | Always dispose of panels when closed |
 | Ignoring Vite optimizations | Suggest appropriate plugins and configurations |
-| Using synchronous file operations | Use VS Code’s async `fs` API |
+| Using synchronous file operations | Use VS Code's async `fs` API |
 | Mixing Svelte 4 and Svelte 5 APIs | Detect and guide migration paths |
-
----
-
-This specification ensures that the **GitHub Copilot Chat Participant** aligns with **VS Code extension best practices** while delivering **specialized guidance for Svelte/SvelteKit developers**. 🚀

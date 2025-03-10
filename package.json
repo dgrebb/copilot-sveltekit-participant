@@ -10,7 +10,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onChat:SvelteKit",
     "onChat:svelte",
     "onStartupFinished"
   ],
@@ -18,11 +17,21 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "dgrebb.copilot-SvelteKit-participant",
+        "id": "copilot-sveltekit-participant.svelte-expert",
         "fullName": "Svelte & SvelteKit Expert",
         "name": "svelte",
         "description": "What can I svelte you with today?",
-        "isSticky": true
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "analyze",
+            "description": "Analyze the current Svelte component or SvelteKit project"
+          },
+          {
+            "name": "help",
+            "description": "Get help with Svelte and SvelteKit concepts"
+          }
+        ]
       }
     ],
     "commands": [
