@@ -16,6 +16,15 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "chatParticipants": [
+      {
+        "id": "dgrebb.copilot-SvelteKit-participant",
+        "fullName": "Svelte & SvelteKit Expert",
+        "name": "svelte",
+        "description": "What can I svelte you with today?",
+        "isSticky": true
+      }
+    ],
     "commands": [
       {
         "command": "copilot-sveltekit-participant.helloWorld",
