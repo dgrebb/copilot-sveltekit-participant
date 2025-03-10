@@ -16,8 +16,35 @@
       {
         "command": "copilot-sveltekit-participant.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "copilot-sveltekit-participant.openSvelteChat",
+        "title": "Open Svelte Expert Chat"
+      },
+      {
+        "command": "copilot-sveltekit-participant.askSvelteQuestion",
+        "title": "Ask Svelte Expert a Question"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Copilot SvelteKit Participant",
+      "properties": {
+        "copilotSvelteKit.enableDetailedExplanations": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable detailed explanations in responses"
+        },
+        "copilotSvelteKit.preferredSvelteVersion": {
+          "type": "string",
+          "enum": [
+            "4",
+            "5"
+          ],
+          "default": "5",
+          "description": "Set your preferred Svelte version"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
