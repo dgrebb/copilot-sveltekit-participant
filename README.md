@@ -1,71 +1,64 @@
-# copilot-sveltekit-participant README
+# Copilot SvelteKit Participant
 
-This is the README for your extension "copilot-sveltekit-participant". After writing up a brief description, we recommend including the following sections.
+A specialized GitHub Copilot Chat Participant for VS Code that provides expert assistance for Svelte and SvelteKit development.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Svelte & SvelteKit Expertise**
+  - Powered by official Svelte documentation ([LLMs.txt](https://svelte.dev/llms-full.txt))
+  - Guidance on Svelte best practices (reactivity, stores, SSR, routing)
+  - Code suggestions that follow Svelte idioms and patterns
 
-For example if there is an image subfolder under your extension project workspace:
+- **Version Compatibility**
+  - Identifies differences between Svelte 4 and Svelte 5 APIs
+  - Provides upgrade guidance for migrating from Svelte 4 to Svelte 5
+  - Suggests modern alternatives to deprecated patterns
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Vite Configuration Assistance**
+  - Performance tuning recommendations
+  - SvelteKit SSR configuration help
+  - Development experience optimizations
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Code Quality Recommendations**
+  - TypeScript best practices
+  - Proper error handling patterns
+  - Component architecture suggestions
+
+## Installation
+
+1. Install the extension from the VS Code Marketplace
+2. Open a Svelte or SvelteKit project
+3. Access the participant through GitHub Copilot Chat
+
+## Usage
+
+1. Open GitHub Copilot Chat in VS Code
+2. Type `@SvelteKit` to activate this participant
+3. Ask questions about Svelte/SvelteKit development
+
+### Example Queries
+
+- "How do I implement a reactive store in Svelte?"
+- "What's the best approach for SSR data loading in SvelteKit?"
+- "Help me optimize my Vite configuration for SvelteKit"
+- "What are the key differences between Svelte 4 and 5?"
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code 1.98.0 or higher
+- GitHub Copilot subscription
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+* `copilotSvelteKit.enableDetailedExplanations`: Enable/disable detailed explanations in responses
+* `copilotSvelteKit.preferredSvelteVersion`: Set your preferred Svelte version (4 or 5)
 
-## Known Issues
+## Contributing
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Release Notes
+## License
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+This extension is licensed under the MIT License.
