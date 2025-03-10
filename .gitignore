@@ -1,5 +1,5 @@
 # Standard .gitignore for a VSCode extension project
-.vscode/
+.vscode/settings.json
 .history/
 *.log
 *.tsbuildinfo
