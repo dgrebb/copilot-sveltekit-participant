@@ -1,5 +1,9 @@
 import * as vscode from 'vscode'
 import { ChatView } from '../views/chatView'
+import {
+  analyzeSvelteComponent,
+  analyzeSvelteKitProject,
+} from './analyzeSvelte'
 
 /**
  * Registers all commands for the extension
@@ -36,6 +40,23 @@ export function registerCommands(
     },
   )
 
+  // Register the analyze Svelte component command
+  const analyzeComponentCommand = vscode.commands.registerCommand(
+    'copilot-sveltekit-participant.analyzeSvelteComponent',
+    analyzeSvelteComponent,
+  )
+
+  // Register the analyze SvelteKit project command
+  const analyzeProjectCommand = vscode.commands.registerCommand(
+    'copilot-sveltekit-participant.analyzeSvelteKitProject',
+    analyzeSvelteKitProject,
+  )
+
   // Add commands to subscriptions for proper disposal
-  context.subscriptions.push(openChatCommand, askQuestionCommand)
+  context.subscriptions.push(
+    openChatCommand,
+    askQuestionCommand,
+    analyzeComponentCommand,
+    analyzeProjectCommand,
+  )
 }
