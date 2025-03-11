@@ -1,8 +1,9 @@
 {
-  "name": "copilot-sveltekit-participant",
-  "displayName": "copilot-sveltekit-participant",
+  "name": "copilot-participant.svelte",
+  "displayName": "Svelte & SvelteKit Expert",
   "description": "A SvelteKit context-ready participant to assist in all your coding needs.",
   "version": "0.0.1",
+  "publisher": "dgrebb",
   "engines": {
     "vscode": "^1.98.0"
   },
@@ -17,7 +18,7 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "copilot-sveltekit-participant.svelte-expert",
+        "id": "copilot-participant.svelte.svelte",
         "fullName": "Svelte & SvelteKit Expert",
         "name": "svelte",
         "description": "What can I svelte you with today?",
@@ -36,35 +37,35 @@
     ],
     "commands": [
       {
-        "command": "copilot-sveltekit-participant.helloWorld",
+        "command": "copilot-participant.svelte.helloWorld",
         "title": "Hello World"
       },
       {
-        "command": "copilot-sveltekit-participant.openSvelteChat",
+        "command": "copilot-participant.svelte.openSvelteChat",
         "title": "Open Svelte Expert Chat"
       },
       {
-        "command": "copilot-sveltekit-participant.askSvelteQuestion",
+        "command": "copilot-participant.svelte.askSvelteQuestion",
         "title": "Ask Svelte Expert a Question"
       },
       {
-        "command": "copilot-sveltekit-participant.analyzeSvelteComponent",
+        "command": "copilot-participant.svelte.analyzeSvelteComponent",
         "title": "Analyze Current Svelte Component"
       },
       {
-        "command": "copilot-sveltekit-participant.analyzeSvelteKitProject",
+        "command": "copilot-participant.svelte.analyzeSvelteKitProject",
         "title": "Analyze SvelteKit Project"
       }
     ],
     "configuration": {
-      "title": "Copilot SvelteKit Participant",
+      "title": "Svelte & SvelteKit Expert",
       "properties": {
-        "copilotSvelteKit.enableDetailedExplanations": {
+        "copilotParticipant.svelte.enableDetailedExplanations": {
           "type": "boolean",
           "default": true,
           "description": "Enable detailed explanations in responses"
         },
-        "copilotSvelteKit.preferredSvelteVersion": {
+        "copilotParticipant.svelte.preferredSvelteVersion": {
           "type": "string",
           "enum": [
             "4",
@@ -119,5 +120,11 @@
     "onlyBuiltDependencies": [
       "esbuild"
     ]
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "The extension needs access to workspace files to analyze Svelte components."
+    }
   }
 }
