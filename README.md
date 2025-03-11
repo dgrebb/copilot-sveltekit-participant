@@ -1,6 +1,6 @@
 # Svelte & SvelteKit Expert for VS Code
 
-A specialized GitHub Copilot Chat participant (dgrebb.copilot-participant.svelte) that provides expert assistance for Svelte and SvelteKit development.
+A specialized GitHub Copilot Chat participant (dgrebb.copilot-participant-svelte) that provides expert assistance for Svelte and SvelteKit development.
 
 ## Features
 
@@ -52,8 +52,8 @@ A specialized GitHub Copilot Chat participant (dgrebb.copilot-participant.svelte
 
 This extension contributes the following settings:
 
-* `copilotParticipant.svelte.enableDetailedExplanations`: Enable/disable detailed explanations in responses
-* `copilotParticipant.svelte.preferredSvelteVersion`: Set your preferred Svelte version (4 or 5)
+* `copilotParticipantSvelte.enableDetailedExplanations`: Enable/disable detailed explanations in responses
+* `copilotParticipantSvelte.preferredSvelteVersion`: Set your preferred Svelte version (4 or 5)
 
 ## Contributing
 

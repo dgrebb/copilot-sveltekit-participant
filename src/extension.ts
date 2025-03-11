@@ -218,7 +218,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Create the participants with the IDs from package.json
   const svelteParticipant = vscode.chat.createChatParticipant(
-    'copilot-participant.svelte.svelte',
+    'copilot-participant-svelte.svelte',
     chatHandler,
   );
 
@@ -265,14 +265,18 @@ async function getFileContentByName(
   fileName: string,
 ): Promise<{ content: string; uri: vscode.Uri } | null> {
   const workspaceFolders = vscode.workspace.workspaceFolders;
-  if (!workspaceFolders) return null;
+  if (!workspaceFolders) {
+    return null;
+  }
 
   // Try to find the file in the workspace
   const files = await vscode.workspace.findFiles(
     `**/${fileName}`,
     '**/node_modules/**',
   );
-  if (files.length === 0) return null;
+  if (files.length === 0) {
+    return null;
+  }
 
   // Read the content of the first matching file
   try {

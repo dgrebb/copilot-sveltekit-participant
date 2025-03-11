@@ -1,5 +1,5 @@
 {
-  "name": "copilot-participant.svelte",
+  "name": "copilot-participant-svelte",
   "displayName": "Svelte & SvelteKit Expert",
   "description": "A SvelteKit context-ready participant to assist in all your coding needs.",
   "version": "0.0.1",
@@ -18,7 +18,7 @@
   "contributes": {
     "chatParticipants": [
       {
-        "id": "copilot-participant.svelte.svelte",
+        "id": "copilot-participant-svelte.svelte",
         "fullName": "Svelte & SvelteKit Expert",
         "name": "svelte",
         "description": "What can I svelte you with today?",
@@ -37,35 +37,35 @@
     ],
     "commands": [
       {
-        "command": "copilot-participant.svelte.helloWorld",
+        "command": "copilot-participant-svelte.helloWorld",
         "title": "Hello World"
       },
       {
-        "command": "copilot-participant.svelte.openSvelteChat",
+        "command": "copilot-participant-svelte.openSvelteChat",
         "title": "Open Svelte Expert Chat"
       },
       {
-        "command": "copilot-participant.svelte.askSvelteQuestion",
+        "command": "copilot-participant-svelte.askSvelteQuestion",
         "title": "Ask Svelte Expert a Question"
       },
       {
-        "command": "copilot-participant.svelte.analyzeSvelteComponent",
+        "command": "copilot-participant-svelte.analyzeSvelteComponent",
         "title": "Analyze Current Svelte Component"
       },
       {
-        "command": "copilot-participant.svelte.analyzeSvelteKitProject",
+        "command": "copilot-participant-svelte.analyzeSvelteKitProject",
         "title": "Analyze SvelteKit Project"
       }
     ],
     "configuration": {
       "title": "Svelte & SvelteKit Expert",
       "properties": {
-        "copilotParticipant.svelte.enableDetailedExplanations": {
+        "copilotParticipantSvelte.enableDetailedExplanations": {
           "type": "boolean",
           "default": true,
           "description": "Enable detailed explanations in responses"
         },
-        "copilotParticipant.svelte.preferredSvelteVersion": {
+        "copilotParticipantSvelte.preferredSvelteVersion": {
           "type": "string",
           "enum": [
             "4",
