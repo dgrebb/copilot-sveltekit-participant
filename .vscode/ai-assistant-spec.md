@@ -1,4 +1,79 @@
-# GitHub Copilot Chat Participant - Svelte & SvelteKit Expert
+# Svelte & SvelteKit Expert - AI Assistant Specification
+
+## Current Implementation
+
+### Core Functionality
+- ✅ Base prompt engineering for accurate Svelte/SvelteKit expertise
+- ✅ Conversation context preservation
+- ✅ Conditional resources display
+- ✅ File analysis with #file: references
+- ✅ Selection analysis with #selection: references
+- ✅ Svelte component analysis (props, events, stores, imports, exports)
+- ✅ SvelteKit project structure analysis
+
+### VS Code Integration
+- ✅ Chat participant registration with proper naming conventions
+- ✅ Custom commands (/analyze, /help)
+- ✅ Basic file system access for workspace analysis
+- ✅ Ability to open and analyze specific files
+
+## Next Steps
+
+### Improve Copilot Command Integration
+- [ ] Add support for #codebase command to analyze project structure
+- [ ] Implement @Folders syntax for targeted directory exploration
+- [ ] Support #symbol: references to analyze specific symbols or functions
+- [ ] Handle #position: references for cursor-based analysis
+
+### Enhance Analysis Capabilities
+- [ ] SvelteKit route analysis to understand app structure
+- [ ] Vite configuration analysis for build optimization
+- [ ] Component dependency graph for refactoring guidance
+- [ ] Performance recommendations based on component structure
+
+### Testing & Quality Assurance
+- [ ] Create test fixtures with sample Svelte components
+- [ ] Add automated tests for filesystem integration
+- [ ] Test with both Svelte 4 and Svelte 5 projects
+- [ ] Measure response quality with different prompt formulations
+
+### Documentation & User Experience
+- [ ] More detailed examples in README.md
+- [ ] Tutorial walkthrough of key features
+- [ ] Screenshots/GIFs of the extension in action
+- [ ] Publishing checklist for VS Code Marketplace
+
+## Implementation Notes
+
+### File System Integration
+Use VS Code's API to better handle file references:
+- For workspace scanning: `vscode.workspace.findFiles()`
+- For reading files: `vscode.workspace.fs.readFile()`
+- For handling references: Implement handlers for #file:, #selection:, etc.
+
+### Copilot Command Research
+Research VS Code Copilot's native handlers for commands like:
+- #codebase - May have built-in functionality in newer VS Code versions
+- @Folders - Might be handled at the Copilot Chat level before reaching our extension
+
+Investigate the `ChatRequestContext` interface in the VS Code API to see if there's a standardized way to access these contexts when they're provided by Copilot.
+
+### Analysis Improvements
+Enhance component analysis to:
+- Detect reactive statements ($: syntax)
+- Identify accessibility issues
+- Suggest optimizations for reactivity
+- Detect common anti-patterns
+
+## Technical Design
+
+The extension follows a modular architecture:
+- **extension.ts**: Main entry point, chat participant registration
+- **utils/svelteComponentAnalyzer.ts**: Component parsing and analysis
+- **commands/**: Implementation of slash commands
+- **views/**: UI-related code for displaying information
+
+When enhancing file system integration, maintain this separation to keep the codebase maintainable.
 
 ## Project Overview
 This VS Code extension creates a specialized GitHub Copilot Chat Participant that provides expert assistance for Svelte and SvelteKit development. The extension itself is built with TypeScript and VS Code's extension API.
