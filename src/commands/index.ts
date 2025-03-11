@@ -17,7 +17,7 @@ export function registerCommands(
 ): void {
   // Register the openSvelteChat command
   const openChatCommand = vscode.commands.registerCommand(
-    'copilot-sveltekit-participant.openSvelteChat',
+    'copilot-participant.svelte.openSvelteChat',
     () => {
       chatView.show();
     },
@@ -25,7 +25,7 @@ export function registerCommands(
 
   // Register the askSvelteQuestion command
   const askQuestionCommand = vscode.commands.registerCommand(
-    'copilot-sveltekit-participant.askSvelteQuestion',
+    'copilot-participant.svelte.askSvelteQuestion',
     async () => {
       const question = await vscode.window.showInputBox({
         prompt: 'What would you like to know about Svelte or SvelteKit?',
@@ -42,13 +42,13 @@ export function registerCommands(
 
   // Register the analyze Svelte component command
   const analyzeComponentCommand = vscode.commands.registerCommand(
-    'copilot-sveltekit-participant.analyzeSvelteComponent',
+    'copilot-participant.svelte.analyzeSvelteComponent',
     analyzeSvelteComponent,
   );
 
   // Register the analyze SvelteKit project command
   const analyzeProjectCommand = vscode.commands.registerCommand(
-    'copilot-sveltekit-participant.analyzeSvelteKitProject',
+    'copilot-participant.svelte.analyzeSvelteKitProject',
     analyzeSvelteKitProject,
   );
 

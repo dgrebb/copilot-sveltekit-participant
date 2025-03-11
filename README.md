@@ -1,6 +1,6 @@
-# Copilot SvelteKit Participant
+# Svelte & SvelteKit Expert for VS Code
 
-A specialized GitHub Copilot Chat Participant for VS Code that provides expert assistance for Svelte and SvelteKit development.
+A specialized GitHub Copilot Chat participant (dgrebb.copilot-participant.svelte) that provides expert assistance for Svelte and SvelteKit development.
 
 ## Features
 
@@ -52,8 +52,8 @@ A specialized GitHub Copilot Chat Participant for VS Code that provides expert a
 
 This extension contributes the following settings:
 
-* `copilotSvelteKit.enableDetailedExplanations`: Enable/disable detailed explanations in responses
-* `copilotSvelteKit.preferredSvelteVersion`: Set your preferred Svelte version (4 or 5)
+* `copilotParticipant.svelte.enableDetailedExplanations`: Enable/disable detailed explanations in responses
+* `copilotParticipant.svelte.preferredSvelteVersion`: Set your preferred Svelte version (4 or 5)
 
 ## Contributing
 
@@ -62,3 +62,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This extension is licensed under the MIT License.
+
+### Context and Reference Support
+
+The Svelte Expert understands VS Code's context features:
+
+- File references: `#file:FileName.svelte` - Analyze a specific file
+- Selection references: `#selection:` - Analyze selected code
+- Multiple references: Ask about multiple files or selections in one prompt
+
+The extension provides Svelte-specific analysis of your code based on the context.
